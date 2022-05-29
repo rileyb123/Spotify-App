@@ -25,8 +25,24 @@ app.get('/', function(req, res) {
   });
 
   app.get('/callback', function(req,resp){
-    resp.send("NEW PAGE")
+      console.log(req);
+    resp.send('<a href="/logout">Log Out</a>')
   });
+
+  app.get('/logout' , function(req,resp){
+      
+      resp.redirect("https://accounts.spotify.com/en/logout?"+
+      querystring.stringify({
+        redirect_uri: 'http://localhost:3001/loggedOut'
+    }));
+  });
+
+  app.get('/loggedOut', function(req,resp){
+    console.log(req);
+  resp.send("It worked")
+});
+
+
 
   const PORT = 3001
   app.listen(PORT, () => {
