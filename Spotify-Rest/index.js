@@ -1,33 +1,28 @@
-const express = require('express')
-const app = express()
-const querystring = require('querystring');
+var express = require('express');
+var app = express()
+var cors = require('cors')
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
+
+
+var querystring = require('querystring');
+
 require('dotenv').config()
 
 
+
 var client_id = process.env.CLIENT_ID;
-var redirect_uri = 'http://localhost:3001/callback';
+var redirect_uri = 'http://localhost:4200/loading-home';
 
 
   
 app.get('/', function(req, res) {
 
-    var state = "HDUTIFJKEUTLAPSD";
+    var state = "";
     var scope = 'user-read-private user-read-email';
-  
-    res.redirect('https://accounts.spotify.com/authorize?' +
-      querystring.stringify({
-        response_type: 'code',
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-        state: state
-      }));
-  });
-
-  app.get('/callback', function(req,resp){
-      console.log(req);
-    resp.send('<a href="/logout">Log Out</a>')
-  });
+    res.json({login_url : "https://accounts.spotify.com/authorize?response_type=code&client_id=857d0328d11a46c8b005072bf1ede343&scope=user-read-private%20user-read-email&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Floading-home&state="})
+});
 
   app.get('/logout' , function(req,resp){
       
@@ -36,12 +31,6 @@ app.get('/', function(req, res) {
         redirect_uri: 'http://localhost:3001/loggedOut'
     }));
   });
-
-  app.get('/loggedOut', function(req,resp){
-    console.log(req);
-  resp.send("It worked")
-});
-
 
 
   const PORT = 3001
