@@ -1,7 +1,10 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const querystring = require('querystring');
-require('dotenv').config()
+const path = require('path');
+const cors = require('cors')
+require('dotenv').config();
+app.use(cors({origin:'http://localhost:4200'}))
 
 
 var client_id = process.env.CLIENT_ID;
@@ -23,12 +26,18 @@ app.get('/', function(req, res) {
         state: state
       }));
   });
+  app.get('/img',function(req,resp){
+    
+    var url = {'url':'https://i.scdn.co/image/ab6775700000ee853a5519cdbcb458213299e79d'}
 
+    resp.send(url)
+  })
   app.get('/callback', function(req,resp){
-    resp.send("NEW PAGE")
+    //resp.send("Moulids")
+   resp.sendFile('/Users/Moulid/Desktop/code/pythonStuff/apiStuff/spot/Spotify-App/Spotify-Rest/index.html');
   });
 
   const PORT = 3001
   app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`)
+      console.log(`Server running on http://localhost:${PORT}/`);
   })
