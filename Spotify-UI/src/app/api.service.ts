@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError,retry } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,8 +12,9 @@ import { catchError,retry } from 'rxjs';
 
 export class ApiService {
   tokenUrl:string ="https://accounts.spotify.com/api/token";
-  CLIENT_ID:string="857d0328d11a46c8b005072bf1ede343";
-  CLIENT_SECRET:string="";
+  
+  CLIENT_ID:string=environment.CLIENT;
+  CLIENT_SECRET:string=environment.ClIENT_SECRET;
 
   params:URLSearchParams = new URLSearchParams();
   encodedString:string = this.CLIENT_ID + ':' + this.CLIENT_SECRET;
@@ -22,12 +24,14 @@ export class ApiService {
   ngOnInit(){
  
   }
-  getImage():Observable<any>{
-    return this.http.get('http://localhost:3001/img')
+  getImage(tok:string):Observable<any>{
+    const ret =  this.http.get('http://localhost:3001/img?token='+tok)
+    return ret
   }
 
   getLoginSpotify(): Observable<any> {
-    return this.http.get("http://localhost:3001/");
+    console.log("getLoginSpotify Function")
+    return this.http.get('http://localhost:3001/')
   }
 
   getAccessToken(code:string): Observable<any> {
@@ -40,7 +44,7 @@ export class ApiService {
       {
         headers: new HttpHeaders({
           'Authorization': 'Basic ' + btoa(this.encodedString),
-          "Content-Type" : "application/x-www-form-urlencoded",
+          "Content-Type" : "application/x-www-form-urlencoded"
         })
       }
     )
