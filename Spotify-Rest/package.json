@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/rileyb123/Spotify-App#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "http": "^0.0.1-security",
     "nodemon": "^2.0.16"
   }
 }

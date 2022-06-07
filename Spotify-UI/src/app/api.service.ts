@@ -21,6 +21,10 @@ export class ApiService {
  
   }
 
+  testGetMe(token:string): Observable<any>{
+    return this.http.get("http://localhost:3001/me?token=" + token);
+  }
+
   getLoginSpotify(): Observable<any> {
     return this.http.get("http://localhost:3001/");
   }
