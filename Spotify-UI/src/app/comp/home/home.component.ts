@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
     
   }
   ngOnInit(){
+    
     this.tok = localStorage.getItem('token') || ''
     this.api.getImage(this.tok).subscribe({
       next:(res)=>{
@@ -27,6 +28,10 @@ export class HomeComponent implements OnInit {
       error:(error)=>{console.log("it's fucked")},
       complete:()=>{console.log("succeed: "+this.title)}
     })
+  }
+
+  logout(){
+
   }
 
 }
