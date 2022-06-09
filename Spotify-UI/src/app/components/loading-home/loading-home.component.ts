@@ -22,7 +22,9 @@ export class LoadingHomeComponent implements OnInit {
     this.apiSerive.getAccessToken(this.code)
     .subscribe({
       next: (response) => {this.token = response.access_token || ""},
-      error: (e) => {console.log(e)},
+      error: (e) => {console.log(e)
+        this.router.navigateByUrl('/error');
+      },
       complete: () => { 
         if(this.token == ""){
           this.router.navigateByUrl('/error');

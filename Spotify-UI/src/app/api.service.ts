@@ -18,7 +18,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   ngOnInit(){
- 
+    
   }
 
   testGetMe(token:string): Observable<any>{
@@ -26,10 +26,30 @@ export class ApiService {
   }
 
   getLoginSpotify(): Observable<any> {
-    return this.http.get("http://localhost:3001/");
+    return this.http.get("http://localhost:3001/")
   }
 
+  // getsecrets(): Observable<any>{
+  //   this.http.get("http://localhost:3001/secrets").subscribe({
+  //     next: (res) => {
+  //       console.log("yoooerero: "+res)
+  //       // 
+  //       console.log(res);
+  //       console.log('???')
+  //       // this.CLIENT_SECRET = response.secret_id;
+  //       // this.CLIENT_ID = response.client_id;
+  //       return res;
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     },
+  //     complete: ()=>{
+  //       console.log("Finished Me");
+  //     }
+  //   });
+  // }
   getAccessToken(code:string): Observable<any> {
+    // this.getsecrets()
     this.params.append('code' , code);
     this.params.append("redirect_uri" , "http://localhost:4200/loading-home");
     this.params.append("grant_type" , "authorization_code");

@@ -14,7 +14,8 @@ require('dotenv').config()
 
 
 
-var client_id = process.env.CLIENT_ID;
+var client_id = process.env.client;
+
 var redirect_uri = 'http://localhost:4200/loading-home';
 
 
@@ -26,6 +27,10 @@ app.get('/', function(req, res) {
     res.json({login_url : "https://accounts.spotify.com/authorize?response_type=code&client_id=857d0328d11a46c8b005072bf1ede343&scope=user-read-private%20user-read-email&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Floading-home&state="})
 });
 
+app.get('/secrets', async function(req,res){
+    console.log("yo "+process.env.CLIENT_ID.toString(),process.env.CLIENT_SECRET.toString())
+    res.json({"moulid":process.env.CLIENT_ID.toString(),"gang":process.env.CLIENT_SECRET.toString()})
+});
 
 app.get('/me' , async function(req,res){
 
@@ -48,5 +53,5 @@ app.get('/me' , async function(req,res){
 
   const PORT = 3001
   app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`)
+      console.log(`Server running on port https://localhost:${PORT}`)
   })
