@@ -1,0 +1,23 @@
+.login-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 25%;
+}
+
+.title{
+    position: inherit;
+    color: #303f9f;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+#button{
+    width: 10%;
+    background-color: #303f9f;
+}
+
+mat-card-header{
+    justify-content: center;
+    color: whitesmoke;
+}
